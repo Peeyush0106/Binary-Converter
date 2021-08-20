@@ -1,3 +1,13 @@
+<!-- 
+
+                    |   |      | |  __
+                    |---| |--| | | |  |
+                    |   | |___ | | |__|
+
+ -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,6 +17,11 @@
 </head>
 
 <style>
+    html {
+        text-align: center;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
     #binary-txt {
         background-color: black;
         color: yellow;
@@ -56,70 +71,113 @@
 </body>
 
 <script>
-    // Javascript Program to convert decimal to binary
-    var letters = [
-        { ltr: "a" }, { ltr: "b" }, { ltr: "c" }, { ltr: "d" }, { ltr: "e" }, { ltr: "f" }, { ltr: "g" }, { ltr: "h" }, { ltr: "i" }, { ltr: "j" }, { ltr: "k" }, { ltr: "l" }, { ltr: "m" }, { ltr: "n" }, { ltr: "o" }, { ltr: "p" }, { ltr: "q" }, { ltr: "r" }, { ltr: "s" }, { ltr: "t" }, { ltr: "u" }, { ltr: "v" }, { ltr: "w" }, { ltr: "x" }, { ltr: "y" }, { ltr: "z" }];
-    var noOfAlphabeticalLetters = 0;
-    for (var i = 0; i < letters.length; i++) {
-        letters[i].binary = (parseInt(i) + 1).toString(2);
-    }
-    var value = prompt("Enter value: ", "Test");
-    for (const n in value) {
-        const character = value[n];
-        if (character === " ") {
-            alert("You shall not enter any space between your characters"); location.reload();
-        }
-    }
-    if (value === null) {
-        alert("You have to enter some value to get the answer. You shall not 'Cancel' the text box");
-        location.reload();
-    }
-    if (value.length === 0) {
-        // No value provided
-        alert("Please enter a valid value");
-        location.reload();
-    }
-    else {
-        if (parseInt(value).toString(2) !== "NaN") {
-            document.getElementById("entered-txt").innerText += value;
-            document.getElementById("binary-txt").innerText += (parseInt(value).toString(2));
-        }
-        else {
-            // Value is in alphabetical form
-            var enteredAlpahsLrCase = [];
-            var enteredAlpahsGivenCase = [];
-            var allBinaryValsOfEnteredTxt = [];
-            var stringOfBinaries = "";
-            var stringOfEnteredTxtWithSpaces = "";
-            for (var j = 0; j < value.length; j++) {
-                enteredAlpahsGivenCase.push(value[j]);
-                enteredAlpahsLrCase.push(value[j].toLowerCase());
+    // Script
+    {
+        // Javascript Program to convert decimal to binary
+        // Defining all the letters
+        {
+            var lettersInArray = [
+                "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"
+            ];
+            var letters = [];
+            var noOfAlphabeticalLetters = 0;
+            for (var i = 0; i < lettersInArray.length; i++) {
+                // Adding all the letters
+                letters.push({ ltr: lettersInArray[i] });
+                // Adding all the binaries of alphabets
+                letters[i].binary = (parseInt(i) + 1).toString(2);
             }
-            for (let k = 0; k < enteredAlpahsLrCase.length; k++) {
-                const alphabet = enteredAlpahsLrCase[k];
-                for (var l = 0; l < letters.length; l++) {
-                    // console.log(value.slice(j, j + 1), letters[j].ltr);
-                    if (alphabet === letters[l].ltr) {
-                        noOfAlphabeticalLetters += 1;
-                        allBinaryValsOfEnteredTxt.push(letters[l].binary);
+        }
+
+        // Asking for name/number
+        var value = prompt("Enter value: ", "Test");
+
+        // Checking for errors in values
+        {
+            // Space
+            for (const n in value) {
+                const character = value[n];
+                if (character === " ") {
+                    alert("You shall not enter any space between your characters"); location.reload();
+                }
+            }
+
+            // If cancelled message
+            if (value === null) {
+                alert("You have to enter some value to get the answer. You shall not 'Cancel' the text box");
+                location.reload();
+            }
+
+            // No value provided
+            if (value.length === 0) {
+                alert("Please enter a valid value");
+                location.reload();
+            }
+        }
+
+        // Complete compilation/conversion + documentation - core of the program
+        {
+            // If the value is a number
+            if (parseInt(value).toString(2) !== "NaN") {
+                document.getElementById("entered-txt").innerText += value;
+                document.getElementById("binary-txt").innerText += (parseInt(value).toString(2));
+            }
+            // If it is in text form
+            else {
+                // Conversion for text form
+                {
+                    // Initial definitions
+                    {
+                        // Value is in alphabetical form
+                        var enteredAlpahsLrCase = [];
+                        // Value is in given form
+                        var enteredAlpahsGivenCase = [];
+                        // Binary values of given text
+                        var allBinaryValsOfEnteredTxt = [];
+                        // String of the binary values
+                        var stringOfBinaries = "";
+                        // String of the entered text values
+                        var stringOfEnteredTxtWithSpaces = "";
+                    }
+
+                    // Changing upper cases to lower case
+                    for (var j = 0; j < value.length; j++) {
+                        enteredAlpahsGivenCase.push(value[j]);
+                        enteredAlpahsLrCase.push(value[j].toLowerCase());
+                    }
+
+                    // adding the binary values of the entered text to an array
+                    for (let k = 0; k < enteredAlpahsLrCase.length; k++) {
+                        const alphabet = enteredAlpahsLrCase[k];
+                        for (var l = 0; l < letters.length; l++) {
+                            if (alphabet === letters[l].ltr) {
+                                noOfAlphabeticalLetters += 1;
+                                allBinaryValsOfEnteredTxt.push(letters[l].binary);
+                            }
+                        }
                     }
                 }
-            }
-            for (const m in allBinaryValsOfEnteredTxt) {
-                stringOfBinaries += allBinaryValsOfEnteredTxt[m];
-                stringOfEnteredTxtWithSpaces += enteredAlpahsGivenCase[m];
-                if (parseInt(m) !== allBinaryValsOfEnteredTxt.length - 1) {
-                    stringOfEnteredTxtWithSpaces += " -- ";
-                    stringOfBinaries += " -- "
+
+                // Documenting the values converted
+                {
+                    for (const m in allBinaryValsOfEnteredTxt) {
+                        stringOfBinaries += allBinaryValsOfEnteredTxt[m];
+                        stringOfEnteredTxtWithSpaces += enteredAlpahsGivenCase[m];
+                        if (parseInt(m) !== allBinaryValsOfEnteredTxt.length - 1) {
+                            stringOfEnteredTxtWithSpaces += " -- ";
+                            stringOfBinaries += " -- "
+                        }
+                    }
+                    document.getElementById("entered-txt").innerText += stringOfEnteredTxtWithSpaces;
+                    document.getElementById("binary-txt").innerText += stringOfBinaries;
                 }
             }
-            document.getElementById("entered-txt").innerText += stringOfEnteredTxtWithSpaces;
-            document.getElementById("binary-txt").innerText += stringOfBinaries;
         }
-    }
-    if (stringOfBinaries === "") {
-        alert("You must not enter any special characters.");
-        location.reload();
+        // stringOfBinaries will be blank if it contain other characters such as @, #, ^, etc., hence, we can directly use stringOfBinaries === ""
+        if (stringOfBinaries === "") {
+            alert("You must not enter any special characters.");
+            location.reload();
+        }
     }
 </script>
 
