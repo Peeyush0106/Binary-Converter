@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Your name / A Number in binary</title>
+</head>
+
+<style>
+    #binary-txt {
+        background-color: black;
+        color: yellow;
+    }
+
+    #entered-txt {
+        background-color: yellow;
+        color: black;
+    }
+
+    #re-enter-btn {
+        color: lightgreen;
+        font-size: 30px;
+        background-color: blue;
+    }
+
+    button {
+        transition: transform .2s;
+    }
+
+    button:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+</style>
+
+<body>
+    <h1>
+        <div>
+            <i>
+                <strong>
+                    <div id="entered-txt">
+                        You entered:
+                        <br>
+                    </div>
+                    <br>
+                    <div id="binary-txt">
+                        Binary Value:
+                        <br>
+                    </div>
+                </strong>
+                </id>
+            </i>
+        </div>
+    </h1>
+    <button onclick="location.reload()" id="re-enter-btn"> Re-enter values </button>
+</body>
+
+<script>
+    // Javascript Program to convert decimal to binary
+    var letters = [
+        { ltr: "a" }, { ltr: "b" }, { ltr: "c" }, { ltr: "d" }, { ltr: "e" }, { ltr: "f" }, { ltr: "g" }, { ltr: "h" }, { ltr: "i" }, { ltr: "j" }, { ltr: "k" }, { ltr: "l" }, { ltr: "m" }, { ltr: "n" }, { ltr: "o" }, { ltr: "p" }, { ltr: "q" }, { ltr: "r" }, { ltr: "s" }, { ltr: "t" }, { ltr: "u" }, { ltr: "v" }, { ltr: "w" }, { ltr: "x" }, { ltr: "y" }, { ltr: "z" }];
+    var noOfAlphabeticalLetters = 0;
+    for (var i = 0; i < letters.length; i++) {
+        letters[i].binary = (parseInt(i) + 1).toString(2);
+    }
+    var value = prompt("Enter value: ", "Test");
+    for (const n in value) {
+        const character = value[n];
+        if (character === " ") {
+            alert("You shall not enter any space between your characters"); location.reload();
+        }
+    }
+    if (value === null) {
+        alert("You have to enter some value to get the answer. You shall not 'Cancel' the text box");
+        location.reload();
+    }
+    if (value.length === 0) {
+        // No value provided
+        alert("Please enter a valid value");
+        location.reload();
+    }
+    else {
+        if (parseInt(value).toString(2) !== "NaN") {
+            document.getElementById("entered-txt").innerText += value;
+            document.getElementById("binary-txt").innerText += (parseInt(value).toString(2));
+        }
+        else {
+            // Value is in alphabetical form
+            var enteredAlpahsLrCase = [];
+            var enteredAlpahsGivenCase = [];
+            var allBinaryValsOfEnteredTxt = [];
+            var stringOfBinaries = "";
+            var stringOfEnteredTxtWithSpaces = "";
+            for (var j = 0; j < value.length; j++) {
+                enteredAlpahsGivenCase.push(value[j]);
+                enteredAlpahsLrCase.push(value[j].toLowerCase());
+            }
+            for (let k = 0; k < enteredAlpahsLrCase.length; k++) {
+                const alphabet = enteredAlpahsLrCase[k];
+                for (var l = 0; l < letters.length; l++) {
+                    // console.log(value.slice(j, j + 1), letters[j].ltr);
+                    if (alphabet === letters[l].ltr) {
+                        noOfAlphabeticalLetters += 1;
+                        allBinaryValsOfEnteredTxt.push(letters[l].binary);
+                    }
+                }
+            }
+            for (const m in allBinaryValsOfEnteredTxt) {
+                stringOfBinaries += allBinaryValsOfEnteredTxt[m];
+                stringOfEnteredTxtWithSpaces += enteredAlpahsGivenCase[m];
+                if (parseInt(m) !== allBinaryValsOfEnteredTxt.length - 1) {
+                    stringOfEnteredTxtWithSpaces += " -- ";
+                    stringOfBinaries += " -- "
+                }
+            }
+            document.getElementById("entered-txt").innerText += stringOfEnteredTxtWithSpaces;
+            document.getElementById("binary-txt").innerText += stringOfBinaries;
+        }
+    }
+    if (stringOfBinaries === "") {
+        alert("You must not enter any special characters.");
+        location.reload();
+    }
+</script>
+
+</html>
